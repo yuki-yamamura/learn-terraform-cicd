@@ -1,0 +1,37 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tflint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.56.0
+
+      - name: Init TFLint
+        run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # `terraform fmt` でフォーマットを実行する
+      - name: Format
+        run: |
+          terraform fmt --diff --recursive environments/staging
+          terraform fmt --diff --recursive environments/production
+
+      # `tflint` でリントを実行する
+      - name: Lint
+        run: |
+          tflint --chdir=environments/staging --config=$(realpath .tflint.hcl) --format compact
+          tflint --chdir=environments/production --config=$(realpath .tflint.hcl) --format compact
