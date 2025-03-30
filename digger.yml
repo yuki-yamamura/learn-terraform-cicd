@@ -1,0 +1,5 @@
+projects:
+  - name: production
+    dir: ./environments/production
+  - name: staging
+    dir: ./environments/staging
