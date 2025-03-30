@@ -32,7 +32,7 @@ resource "aws_iam_role" "ecr_access" {
   })
 }
 
-resource "aws_iam_role" "ecr_access_2" {
+resource "aws_iam_role" "ecr-access-2" {
   name = "ecr-access-2"
 
   assume_role_policy = jsonencode({
@@ -47,11 +47,6 @@ resource "aws_iam_role" "ecr_access_2" {
       },
     ]
   })
-}
-
-resource "aws_instance" "app" {
-  ami           = "ami-0ff8a91507fiii"
-  instance_type = "t1.micro" # invalid type!
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_access_attachment" {
