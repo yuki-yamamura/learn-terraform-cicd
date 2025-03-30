@@ -1,5 +1,4 @@
 resource "aws_iam_policy" "read_only_ecr_access" {
-  // change with invalid comment
   name = "read-only-ecr-access-renamed"
   policy = jsonencode({
     Version = "2012-10-17",
@@ -36,4 +35,21 @@ resource "aws_iam_role" "ecr_access" {
 resource "aws_iam_role_policy_attachment" "ecr_access_attachment" {
   role       = aws_iam_role.ecr_access.name
   policy_arn = aws_iam_policy.read_only_ecr_access.arn
+}
+
+resource "aws_iam_role" "eventbridge-access" {
+  name = "eventbridge-access"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "events.amazonaws.com"
+        }
+      },
+    ]
+  })
 }
