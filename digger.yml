@@ -3,3 +3,5 @@ projects:
     dir: ./environments/production
   - name: staging
     dir: ./environments/staging
+auto_merge: true
+auto_merge_strategy: "merge"
