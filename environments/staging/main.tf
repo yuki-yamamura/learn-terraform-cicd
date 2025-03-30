@@ -1,5 +1,6 @@
 resource "aws_iam_policy" "read_only_ecr_access" {
-  name = "read-only-ecr-access-renamed"
+  // change with invalid comment
+  name = "read-only-ecr-access"
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
