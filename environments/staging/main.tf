@@ -1,10 +1,10 @@
 resource "aws_iam_policy" "read_only_ecr_access" {
-  name = "read-only-ecr-access"
+  name = "read-only-ecr-access-renamed"
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-          Effect = "Allow",
+        Effect = "Allow",
         Action = [
           "ecr:GetDownloadUrlForLayer",
           "ecr:GetAuthorizationToken",
