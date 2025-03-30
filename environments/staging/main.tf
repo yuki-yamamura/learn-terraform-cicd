@@ -15,7 +15,7 @@ resource "aws_iam_policy" "read_only_ecr_access" {
   })
 }
 
-resource "aws_iam_role" "ecr-access" {
+resource "aws_iam_role" "ecr_access" {
   name = "ecr-access"
 
   assume_role_policy = jsonencode({
@@ -34,6 +34,6 @@ resource "aws_iam_role" "ecr-access" {
 
 // invalid comment
 resource "aws_iam_role_policy_attachment" "ecr_access_attachment" {
-  role       = aws_iam_role.ecr-access.name
+  role       = aws_iam_role.ecr_access.name
   policy_arn = aws_iam_policy.read_only_ecr_access.arn
 }
